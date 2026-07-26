@@ -1,0 +1,10 @@
+{
+  "name": "scroll-seq",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "node --test \"src/**/*.test.js\"",
+    "dev": "npx --yes serve@14 -l 5173 ."
+  }
+}

@@ -1,0 +1,495 @@
+/* 편집실 라이트테이블 컨셉의 도구 전역 스타일 */
+
+:root {
+  --ink: #14161a;
+  --surface: #1c1f25;
+  --raised: #23272f;
+  --line: #2f353f;
+  --paper: #e7e9ec;
+  --muted: #858d9b;
+  --signal: #f2cb05;
+  --alert: #ff6b5a;
+
+  --display: 'Archivo', system-ui, sans-serif;
+  --mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+  --gap: 1.5rem;
+  --radius: 3px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* 클래스에 display를 지정한 요소도 hidden 속성이 확실히 먹도록 한다 */
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  padding: 0 1.25rem 6rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-family: var(--display);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+/* ── 헤더 ─────────────────────────────────────── */
+
+.masthead {
+  padding: 4.5rem 0 3rem;
+  border-bottom: 1px solid var(--line);
+}
+
+.masthead h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.9rem, 6vw, 2.9rem);
+  font-weight: 800;
+  font-variation-settings: 'wdth' 118;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  text-transform: uppercase;
+}
+
+.masthead h1 em {
+  font-style: normal;
+  color: var(--signal);
+}
+
+.masthead p {
+  margin: 0;
+  max-width: 44ch;
+  color: var(--muted);
+}
+
+/* ── 단계 블록 ─────────────────────────────────── */
+
+.step {
+  padding: 2.75rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.step[hidden] {
+  display: none;
+}
+
+.step-head {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.step-num {
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--signal);
+  letter-spacing: 0.1em;
+}
+
+.step-head h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  font-variation-settings: 'wdth' 108;
+  letter-spacing: 0.01em;
+}
+
+.step.locked {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ── 영상 투입구 ───────────────────────────────── */
+
+.drop {
+  display: grid;
+  place-items: center;
+  gap: 0.6rem;
+  min-height: 200px;
+  padding: 2rem;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.15s, background 0.15s;
+}
+
+.drop:hover,
+.drop.over {
+  border-color: var(--signal);
+  background: var(--raised);
+}
+
+.drop strong {
+  font-weight: 600;
+}
+
+.drop span {
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.loaded {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--gap);
+  align-items: start;
+}
+
+.loaded video {
+  width: 100%;
+  border-radius: var(--radius);
+  background: #000;
+  display: block;
+}
+
+.meta {
+  margin: 0;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.35rem 1.25rem;
+  font-family: var(--mono);
+  font-size: 0.8rem;
+}
+
+.meta dt {
+  color: var(--muted);
+}
+
+.meta dd {
+  margin: 0;
+}
+
+.relink {
+  margin-top: 1rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.relink:hover {
+  color: var(--signal);
+}
+
+/* ── 설정 입력 ─────────────────────────────────── */
+
+.controls {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--gap);
+  margin-bottom: 2.25rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.field input[type='number'] {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 1rem;
+}
+
+.field input[type='number']:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 1px;
+}
+
+.field input[type='range'] {
+  width: 100%;
+  accent-color: var(--signal);
+}
+
+.field .hint {
+  margin: 0.4rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+/* ── 시그니처: 프레임 눈금자 ──────────────────────── */
+
+.ruler {
+  margin-bottom: 2rem;
+}
+
+.ruler canvas {
+  display: block;
+  width: 100%;
+  height: 68px;
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.ruler-legend {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  color: var(--muted);
+}
+
+/* ── 산출 수치 ─────────────────────────────────── */
+
+.readout {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.readout div {
+  padding: 1rem 1.1rem;
+  background: var(--surface);
+}
+
+.readout dt {
+  margin-bottom: 0.3rem;
+  font-family: var(--mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.readout dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 1.35rem;
+  font-weight: 500;
+}
+
+.readout dd small {
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.warn {
+  margin: 1rem 0 0;
+  padding: 0.75rem 1rem;
+  border-left: 2px solid var(--alert);
+  background: var(--surface);
+  font-size: 0.85rem;
+  color: var(--paper);
+}
+
+.warn[hidden] {
+  display: none;
+}
+
+/* ── 엔진 상태 ─────────────────────────────────── */
+
+.engine {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--mono);
+  font-size: 0.78rem;
+  color: var(--muted);
+}
+
+.dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--muted);
+  flex: none;
+}
+
+.engine.busy .dot {
+  background: var(--signal);
+  animation: pulse 1.1s ease-in-out infinite;
+}
+
+.engine.ready .dot {
+  background: var(--signal);
+}
+
+.engine.failed .dot {
+  background: var(--alert);
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .engine.busy .dot {
+    animation: none;
+  }
+}
+
+/* ── 반응형 ────────────────────────────────────── */
+
+@media (max-width: 560px) {
+  .loaded,
+  .controls {
+    grid-template-columns: 1fr;
+  }
+
+  .readout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── 변환 실행 ─────────────────────────────────── */
+
+.go {
+  margin-top: 1.5rem;
+  padding: 0.85rem 1.6rem;
+  border: 0;
+  border-radius: var(--radius);
+  background: var(--signal);
+  color: var(--ink);
+  font-family: var(--display);
+  font-size: 0.92rem;
+  font-weight: 700;
+  font-variation-settings: 'wdth' 108;
+  letter-spacing: 0.01em;
+  cursor: pointer;
+  transition: filter 0.15s;
+}
+
+.go:hover:not(:disabled) {
+  filter: brightness(1.12);
+}
+
+.go:disabled {
+  background: var(--line);
+  color: var(--muted);
+  cursor: not-allowed;
+}
+
+.go:focus-visible {
+  outline: 2px solid var(--paper);
+  outline-offset: 2px;
+}
+
+.progress {
+  margin-top: 1.5rem;
+}
+
+.bar {
+  height: 4px;
+  border-radius: 2px;
+  background: var(--line);
+  overflow: hidden;
+}
+
+.bar span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--signal);
+  transition: width 0.2s linear;
+}
+
+.progress p {
+  margin: 0.6rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.result {
+  margin-top: 2rem;
+}
+
+.note {
+  margin: 0.9rem 0 0;
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  color: var(--muted);
+}
+
+/* ── 미리보기 스크러버 ──────────────────────────── */
+
+.scrub canvas {
+  display: block;
+  width: 100%;
+  max-height: 420px;
+  object-fit: contain;
+  border-radius: var(--radius);
+  background: #000;
+}
+
+.scrub input[type='range'] {
+  width: 100%;
+  margin-top: 1rem;
+  accent-color: var(--signal);
+}
+
+/* ── 코드 출력 ─────────────────────────────────── */
+
+#snippet {
+  width: 100%;
+  height: 260px;
+  margin-top: 0.5rem;
+  padding: 1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.72rem;
+  line-height: 1.55;
+  resize: vertical;
+  white-space: pre;
+  overflow-wrap: normal;
+  overflow-x: auto;
+}
+
+#snippet:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 1px;
+}
+
+#cdn {
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--paper);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+}
+
+#cdn:focus-visible {
+  outline: 2px solid var(--signal);
+  outline-offset: 1px;
+}
