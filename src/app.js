@@ -1,5 +1,6 @@
 // 영상 입력, 스크롤 설정 계산, 변환 엔진 로딩을 묶는 메인 로직
 
+import { inject } from '@vercel/analytics';
 import {
   calcFrameCount,
   scrollDistance,
@@ -8,6 +9,9 @@ import {
 } from './frame-calc.js';
 import { buildSnippet } from './snippet.js';
 import { zipSync } from './vendor/fflate.js';
+
+// Initialize Vercel Web Analytics
+inject();
 
 /** ffmpeg 클래스와 워커는 저장소에 포함한다. 워커는 같은 출처에서만 생성할 수 있다. */
 const FF_LOCAL = './vendor/ffmpeg/index.js';
